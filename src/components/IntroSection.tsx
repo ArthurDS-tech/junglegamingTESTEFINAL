@@ -5,10 +5,10 @@ type IntroSectionProps = {
   imageAlt: string;
   imageSrc: string;
   copy: string;
-  buttonHref: string;
+  onCtaClick: () => void;
 };
 
-export function IntroSection({ label, imageAlt, imageSrc, copy, buttonHref }: IntroSectionProps) {
+export function IntroSection({ label, imageAlt, imageSrc, copy, onCtaClick }: IntroSectionProps) {
   return (
     <section className="content-section intro-section" id="about" data-reveal>
       <div className="intro-grid">
@@ -19,12 +19,12 @@ export function IntroSection({ label, imageAlt, imageSrc, copy, buttonHref }: In
             <span>fastest builders</span><br />
             on the planet.
           </h2>
-          <a className="section-button" href={buttonHref}>
-            <span>About us</span>
+          <button type="button" className="section-button" onClick={onCtaClick}>
+            <span>Start a project</span>
             <span className="section-button-icon" aria-hidden="true">
               <ArrowUpRight size={15} strokeWidth={2.2} />
             </span>
-          </a>
+          </button>
         </div>
 
         <div className="intro-media">

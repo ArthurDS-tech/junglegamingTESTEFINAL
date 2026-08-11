@@ -15,9 +15,7 @@ type BuildTimelineSectionProps = {
 
 export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: BuildTimelineSectionProps) {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
-  const sectionRef = useRef<HTMLElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -25,54 +23,35 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
   }, [steps.length]);
 
   useEffect(() => {
-    const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
     const measure = () => {
       if (viewportRef.current) {
         setViewportWidth(viewportRef.current.clientWidth);
       }
     };
 
-    const updateFromScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
-
-      setScrollProgress(progress);
-
-      if (steps.length > 1) {
-        setActiveIndex(Math.round(progress * (steps.length - 1)));
-      }
-    };
-
-    let frame = 0;
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        measure();
-        updateFromScroll();
-      });
-    };
-
     measure();
-    updateFromScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let intervalId = 0;
+
+    if (!reduceMotion && steps.length > 1) {
+      intervalId = window.setInterval(() => {
+        setActiveIndex((current) => (current + 1) % steps.length);
+      }, 3000);
+    }
+
+    window.addEventListener('resize', measure);
 
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      if (intervalId) window.clearInterval(intervalId);
+      window.removeEventListener('resize', measure);
     };
   }, [steps.length]);
 
-  const maxTranslate = viewportWidth * Math.max(steps.length - 1, 0);
+  const translateX = viewportWidth * activeIndex;
 
   return (
-    <section className="timeline-section" id="services" data-reveal ref={sectionRef}>
+    <section className="timeline-section" id="services" data-reveal>
       <div className="timeline-shell">
         <p className="section-kicker timeline-kicker">{label}</p>
 
@@ -80,7 +59,7 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
           <div
             className="timeline-track"
             style={{
-              transform: `translate3d(-${scrollProgress * maxTranslate}px, 0, 0)`,
+              transform: `translate3d(-${translateX}px, 0, 0)`,
             }}
           >
             {steps.map((step, index) => (
@@ -108,7 +87,6 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
                 aria-pressed={index === activeIndex}
                 onClick={() => {
                   setActiveIndex(index);
-                  setScrollProgress(steps.length > 1 ? index / (steps.length - 1) : 0);
                 }}
               />
             );
