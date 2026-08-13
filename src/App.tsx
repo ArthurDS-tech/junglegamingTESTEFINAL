@@ -24,18 +24,21 @@ const timelineSteps: BuildTimelineStep[] = [
     duration: '2-4 weeks',
     image: '/images/build-foundations.png',
     alt: 'Fundacao de obra vista de cima com escavadeira e terreno preparado',
+    copy: 'We clear the site, pour the slab, and lock the base geometry that everything else depends on.',
   },
   {
     title: 'Raise the structure',
     duration: '4-8 weeks',
     image: '/images/build-structure.png',
     alt: 'Estrutura residencial em construcao com formas e materiais no canteiro',
+    copy: 'Frames rise fast, the volume starts to read, and the house gets its final silhouette.',
   },
   {
     title: 'Finish and handoff',
     duration: '1-2 weeks',
     image: '/images/hero-excavator.jpg',
     alt: 'Obra finalizada com acabamento e area externa organizada',
+    copy: 'Systems are tuned, the finish is polished, and the last walkthrough turns a build into a home.',
   },
 ];
 

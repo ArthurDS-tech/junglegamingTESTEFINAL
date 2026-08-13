@@ -9,6 +9,7 @@ Landing page em React + TypeScript + Vite para uma marca de construcao premium. 
 - Vite
 - CSS global em `src/index.css`
 - Framer Motion para a topbar animada
+- GSAP + ScrollTrigger para a timeline com snap scroll e profundidade 3D
 - Lucide React para os icones
 
 ## Estrutura do frontend
@@ -36,7 +37,7 @@ public/
 - `src/App.tsx` monta a pagina inteira e conecta as secoes.
 - `src/components/ui/navigation-menu.tsx` controla a topbar fixa com animacao no scroll.
 - `src/components/IntroSection.tsx` renderiza a secao introdutoria com imagem e CTA.
-- `src/components/BuildTimelineSection.tsx` exibe a timeline com etapas navegaveis.
+- `src/components/BuildTimelineSection.tsx` exibe a timeline com etapas navegaveis e animacao em scroll.
 - `src/components/StatsSection.tsx` mostra as metricas da marca em formato de cards.
 - `src/index.css` concentra o design system, responsividade e animacoes de entrada.
 - `src/lib/utils.ts` fornece o helper `cn` para combinar classes.
