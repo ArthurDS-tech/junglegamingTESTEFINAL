@@ -183,7 +183,6 @@ button { color: inherit; font: inherit; background: none; border: 0; cursor: poi
 .timeline-card-badge { position: absolute; top: 18px; left: 18px; z-index: 1; display: inline-flex; align-items: center; min-width: 72px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; background: rgba(11,15,16,.58); color: #f1f0eb; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; backdrop-filter: blur(14px); }
 .timeline-card-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: clamp(22px, 3vw, 38px); background: linear-gradient(180deg, rgba(9,12,13,.96), rgba(13,16,17,.94)); }
 .timeline-card-copy::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.08), transparent); }
-.timeline-card-kicker { margin: 0; color: #ff8c3d; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .timeline-title { margin: 0; color: #f1f0eb; font-size: clamp(34px, 4.5vw, 72px); font-weight: 900; letter-spacing: -.09em; line-height: .88; }
 .timeline-duration { margin: 0; color: rgba(241,240,235,.72); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .timeline-copy { margin: 0; max-width: 32ch; color: rgba(241,240,235,.68); font-size: 13px; line-height: 1.6; }
@@ -218,14 +217,14 @@ button { color: inherit; font: inherit; background: none; border: 0; cursor: poi
 .section-media img { transform: scale(1.035); transition: transform .95s cubic-bezier(.22,1,.36,1), filter .6s ease; }
 .intro-section.is-visible .section-media img { transform: scale(1); }
 
-.timeline-section[data-reveal] .timeline-shell { opacity: 0; transform: translateY(24px); transition: opacity .75s ease, transform .88s cubic-bezier(.22,1,.36,1); }
-.timeline-section.is-visible .timeline-shell { opacity: 1; transform: translateY(0); }
-.timeline-section[data-reveal] .timeline-heading,
-.timeline-section[data-reveal] .timeline-stage,
-.timeline-section[data-reveal] .timeline-progress { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .82s cubic-bezier(.22,1,.36,1); }
-.timeline-section.is-visible .timeline-heading { opacity: 1; transform: translateY(0); transition-delay: .04s; }
-.timeline-section.is-visible .timeline-stage { opacity: 1; transform: translateY(0); transition-delay: .1s; }
-.timeline-section.is-visible .timeline-progress { opacity: 1; transform: translateY(0); transition-delay: .16s; }
+.timeline-shell[data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .75s ease, transform .88s cubic-bezier(.22,1,.36,1); }
+.timeline-shell.is-visible { opacity: 1; transform: translateY(0); }
+.timeline-shell[data-reveal] .timeline-heading,
+.timeline-shell[data-reveal] .timeline-stage,
+.timeline-shell[data-reveal] .timeline-progress { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .82s cubic-bezier(.22,1,.36,1); }
+.timeline-shell.is-visible .timeline-heading { opacity: 1; transform: translateY(0); transition-delay: .04s; }
+.timeline-shell.is-visible .timeline-stage { opacity: 1; transform: translateY(0); transition-delay: .1s; }
+.timeline-shell.is-visible .timeline-progress { opacity: 1; transform: translateY(0); transition-delay: .16s; }
 
 .stats-section[data-reveal] .stats-grid-modern { opacity: 0; transform: translateY(22px); transition: opacity .72s ease, transform .84s cubic-bezier(.22,1,.36,1); }
 .stats-section.is-visible .stats-grid-modern { opacity: 1; transform: translateY(0); }
@@ -359,10 +358,10 @@ button { color: inherit; font: inherit; background: none; border: 0; cursor: poi
   [data-reveal], [data-reveal].is-visible,
   .intro-section[data-reveal] .intro-copy-wrap,
   .intro-section[data-reveal] .intro-media,
-  .timeline-section[data-reveal] .timeline-shell,
-  .timeline-section[data-reveal] .timeline-heading,
-  .timeline-section[data-reveal] .timeline-stage,
-  .timeline-section[data-reveal] .timeline-progress,
+  .timeline-shell[data-reveal],
+  .timeline-shell[data-reveal] .timeline-heading,
+  .timeline-shell[data-reveal] .timeline-stage,
+  .timeline-shell[data-reveal] .timeline-progress,
   .timeline-card,
   .stats-section[data-reveal] .stats-grid-modern,
   .stat-card-modern {

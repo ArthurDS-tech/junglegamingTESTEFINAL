@@ -88,7 +88,7 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
       const trigger = ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: () => `+=${window.innerHeight * totalTransitions}`,
+        end: () => `+=${window.innerHeight * steps.length}`,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
@@ -142,8 +142,8 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
   };
 
   return (
-    <section className="timeline-section" id="services" data-reveal ref={sectionRef}>
-      <div className="timeline-shell">
+    <section className="timeline-section" id="services" ref={sectionRef}>
+      <div className="timeline-shell" data-reveal>
         <div className="timeline-heading">
           <p className="section-kicker timeline-kicker">{label}</p>
           <p className="timeline-summary">Scroll to snap through the three build phases in a 3D carousel.</p>
@@ -162,7 +162,6 @@ export function BuildTimelineSection({ label, steps, initialActiveIndex = 0 }: B
               </div>
 
               <div className="timeline-card-copy">
-                <p className="timeline-card-kicker">{label}</p>
                 <h2 className="timeline-title">{step.title}</h2>
                 <p className="timeline-duration">{step.duration}</p>
                 {step.copy ? <p className="timeline-copy">{step.copy}</p> : null}
